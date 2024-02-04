@@ -6,8 +6,8 @@
 
 using namespace std;
 
-Clothing::Clothing(const std::string category, const std::string name, double price, int qty, const std::string size, const std::string brand) :
-    Product(category, name, price, qty)
+Clothing::Clothing(const std::string name, double price, int qty, const std::string size, const std::string brand) :
+    Product("Clothing", name, price, qty)
 {
     size_ = size;
     brand_ = brand;
