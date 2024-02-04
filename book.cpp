@@ -36,15 +36,15 @@ bool Book::isMatch(std::vector<std::string>& searchTerms) const{
 
 std::string Book::displayString() const{
     std::string myInfo;
-    myInfo += "Name: " + name_ + ", ";
+    myInfo += name_ + "\n";
     stringstream ss;
     ss << price_;
     std::string temp;
     ss >> temp;
-    myInfo += "Price: " + temp + ", ";
-    myInfo += "Quantity: " + to_string(qty_) + ", ";
-    myInfo += "ISBN: " + isbn_ + ", ";
     myInfo += "Author: " + author_;
+    myInfo += " ISBN: " + isbn_ + "\n";
+    myInfo += temp;
+    myInfo += " " + to_string(qty_) + " left";
     return myInfo;
 }
 

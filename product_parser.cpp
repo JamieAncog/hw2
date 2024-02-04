@@ -26,7 +26,6 @@ Product* ProductParser::parse(string category,
                               string& errorMsg,
                               int& lineno)
 {
-
     parseCommonProduct(is, error, errorMsg, lineno);
     if(error) return NULL;
     return parseSpecificProduct(category, is, error, errorMsg, lineno);
@@ -130,8 +129,8 @@ std::string ProductBookParser::categoryID()
  */
 Product* ProductBookParser::makeProduct()
 {
-
-
+    Book myBook(prodName_, price_, qty_, isbn_, author_);
+    return &myBook;
 }
 
 
@@ -185,9 +184,8 @@ std::string ProductClothingParser::categoryID()
  */
 Product* ProductClothingParser::makeProduct()
 {
-
-
-
+    Clothing myClothing(prodName_, price_, qty_, size_, brand_);
+    return &myClothing;
 }
 
 
@@ -245,6 +243,6 @@ std::string ProductMovieParser::categoryID()
  */
 Product* ProductMovieParser::makeProduct()
 {
-
-
+    Movie myMovie(prodName_, price_, qty_, genre_, rating_);
+    return &myMovie;
 }
