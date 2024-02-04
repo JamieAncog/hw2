@@ -8,6 +8,8 @@
 #include "product.h"
 #include "db_parser.h"
 #include "product_parser.h"
+#include "datastore.h"
+#include "mydatastore.h"
 #include "util.h"
 
 using namespace std;
@@ -29,7 +31,7 @@ int main(int argc, char* argv[])
      * Declare your derived DataStore object here replacing
      *  DataStore type to your derived type
      ****************/
-    DataStore ds;
+    MyDataStore ds;
 
 
 

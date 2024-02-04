@@ -38,6 +38,7 @@ public:
     std::string getName() const;
     int getQty() const;
     void subtractQty(int num);
+    std::string getCat() const;
 
 protected:
     std::string name_;

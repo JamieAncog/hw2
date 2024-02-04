@@ -32,6 +32,9 @@ public:
      */
     void dump(std::ostream& os) const;
 
+    std::string getSize() const;
+    std::string getBrand() const;
+
 protected:
     std::string size_;
     std::string brand_;

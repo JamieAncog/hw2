@@ -53,5 +53,7 @@ void Product::dump(std::ostream& os) const
     os << category_ << "\n" << name_ << "\n" << price_ << "\n" << qty_ << endl;
 }
 
-
+std::string Product::getCat() const{
+    return category_;
+}
 

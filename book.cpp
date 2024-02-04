@@ -51,3 +51,12 @@ std::string Book::displayString() const{
 void Book::dump(std::ostream& os) const{
     os << this->displayString() << endl;
 }
+
+std::string Book::getAuthor() const{
+    return author_;
+}
+
+std::string Book::getIsbn() const{
+    return isbn_;
+}
+

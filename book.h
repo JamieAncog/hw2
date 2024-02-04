@@ -32,6 +32,9 @@ public:
      */
     void dump(std::ostream& os) const;
 
+    std::string getIsbn() const;
+    std::string getAuthor() const;
+
 protected:
     std::string isbn_;
     std::string author_;

@@ -50,3 +50,12 @@ std::string Movie::displayString() const{
 void Movie::dump(std::ostream& os) const{
     os << this->displayString() << endl;
 }
+
+std::string Movie::getGenre() const{
+    return genre_;
+}
+
+std::string Movie::getRating() const{
+    return rating_;
+}
+

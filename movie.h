@@ -32,6 +32,9 @@ public:
      */
     void dump(std::ostream& os) const;
 
+    std::string getGenre() const;
+    std::string getRating() const;
+
 protected:
     std::string genre_;
     std::string rating_;

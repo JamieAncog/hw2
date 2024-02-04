@@ -50,3 +50,11 @@ std::string Clothing::displayString() const{
 void Clothing::dump(std::ostream& os) const{
     os << this->displayString() << endl;
 }
+
+std::string Clothing::getSize() const{
+    return size_;
+}
+
+std::string Clothing::getBrand() const{
+    return brand_;
+}
