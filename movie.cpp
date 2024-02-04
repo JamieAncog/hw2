@@ -2,6 +2,7 @@
 #include <iomanip>
 #include "product.h"
 #include "movie.h"
+#include "util.h"
 
 using namespace std;
 
@@ -15,8 +16,16 @@ Movie::Movie(const std::string category, const std::string name, double price, i
 Movie::~Movie() {}
 
 std::set<std::string> Movie::keywords() const{
-    std::set<std::string> mySet;
-    return mySet;
+    std::set<std::string> keys;
+    std::set<std::string> genreKeys = parseStringToWords(genre_);
+    std::set<std::string> nameKeys = parseStringToWords(name_);
+    for (std::set<std::string>::iterator it = genreKeys.begin(); it != genreKeys.end(); ++it){
+        keys.insert(*it);
+    }
+    for (std::set<std::string>::iterator it = nameKeys.begin(); it != nameKeys.end(); ++it){
+        keys.insert(*it);
+    }
+    return keys;
 }
 
 bool Movie::isMatch(std::vector<std::string>& searchTerms) const{
@@ -25,10 +34,19 @@ bool Movie::isMatch(std::vector<std::string>& searchTerms) const{
 }
 
 std::string Movie::displayString() const{
-    std::string mySet;
-    return mySet;
+    std::string myInfo;
+    myInfo += "Name: " + name_ + ", ";
+    stringstream ss;
+    ss << price_;
+    std::string temp;
+    ss >> temp;
+    myInfo += "Price: " + temp + ", ";
+    myInfo += "Quantity: " + to_string(qty_) + ", ";
+    myInfo += "Genre: " + genre_ + ", ";
+    myInfo += "Rating: " + rating_;
+    return myInfo;
 }
 
 void Movie::dump(std::ostream& os) const{
-
+    os << this->displayString() << endl;
 }
