@@ -7,7 +7,7 @@
 using namespace std;
 
 Book::Book(const std::string name, double price, int qty, const std::string isbn, const std::string author) :
-    Product("Book", name, price, qty)
+    Product("book", name, price, qty)
 {
     isbn_ = isbn;
     author_ = author;

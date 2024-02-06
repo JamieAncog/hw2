@@ -129,8 +129,8 @@ std::string ProductBookParser::categoryID()
  */
 Product* ProductBookParser::makeProduct()
 {
-    Book myBook(prodName_, price_, qty_, isbn_, author_);
-    return &myBook;
+    Book* myBook = new Book(prodName_, price_, qty_, isbn_, author_);
+    return myBook;
 }
 
 
@@ -184,8 +184,8 @@ std::string ProductClothingParser::categoryID()
  */
 Product* ProductClothingParser::makeProduct()
 {
-    Clothing myClothing(prodName_, price_, qty_, size_, brand_);
-    return &myClothing;
+    Clothing* myClothing = new Clothing(prodName_, price_, qty_, size_, brand_);
+    return myClothing;
 }
 
 
@@ -243,6 +243,6 @@ std::string ProductMovieParser::categoryID()
  */
 Product* ProductMovieParser::makeProduct()
 {
-    Movie myMovie(prodName_, price_, qty_, genre_, rating_);
-    return &myMovie;
+    Movie* myMovie = new Movie(prodName_, price_, qty_, genre_, rating_);
+    return myMovie;
 }
