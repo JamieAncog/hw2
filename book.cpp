@@ -20,10 +20,10 @@ std::set<std::string> Book::keywords() const{
     std::set<std::string> authorKeys = parseStringToWords(author_);
     std::set<std::string> nameKeys = parseStringToWords(name_);
     for (std::set<std::string>::iterator it = authorKeys.begin(); it != authorKeys.end(); ++it){
-        keys.insert(*it);
+        keys.insert(convToLower(*it));
     }
     for (std::set<std::string>::iterator it = nameKeys.begin(); it != nameKeys.end(); ++it){
-        keys.insert(*it);
+        keys.insert(convToLower(*it));
     }
     keys.insert(isbn_);
     return keys;

@@ -38,8 +38,8 @@ std::vector<Product*> MyDataStore::search(std::vector<std::string>& terms, int t
     if (type == 0){
         for (int i = 0; i < (int) products_.size(); i++){
             std::set<string> keys = products_[i]->keywords();
-            std::set<string> myInterS = setIntersection<string>(keys, mySet);
-            if (myInterS == mySet){
+            std::set<string> myInterS = setIntersection<string>(keys, mySet);  
+            if (myInterS.size() >= terms.size()){
                 myProds.push_back(products_[i]);
             }
         }
@@ -47,8 +47,8 @@ std::vector<Product*> MyDataStore::search(std::vector<std::string>& terms, int t
     else {
         for (int i = 0; i < (int) products_.size(); i++){
             std::set<string> keys = products_[i]->keywords();
-            std::set<string> myUnion = setUnion(keys, mySet);
-            if (myUnion.size() >= 1){
+            std::set<string> myUnion = setUnion<string>(keys, mySet);
+            if (myUnion.size() < keys.size() + mySet.size()){
                 myProds.push_back(products_[i]);
             }
         }

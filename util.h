@@ -5,13 +5,32 @@
 #include <iostream>
 #include <set>
 
-
+//Delete
+using namespace std;
 /** Complete the setIntersection and setUnion functions below
  *  in this header file (since they are templates).
  *  Both functions should run in time O(n*log(n)) and not O(n^2)
  */
 template <typename T>
 std::set<T> setIntersection(std::set<T>& s1, std::set<T>& s2)
+{
+    std::set<T> s3;
+    for (typename std::set<T>::iterator it = s1.begin(); it != s1.end(); ++it){
+        if (s2.find(*it) != s2.end()){
+            s3.insert(*it);
+        }
+    }
+    /*
+    typename std::set<T>::iterator it;
+    for (it = s3.begin(); it != s3.end(); ++it){
+        cout << *it << " " << endl;
+    }
+    */
+    return s3;
+}
+
+template <typename T>
+std::set<T> setUnion(std::set<T>& s1, std::set<T>& s2)
 {
     std::set<T> s3;
     for (typename std::set<T>::iterator it = s1.begin(); it != s1.end(); ++it){
@@ -23,26 +42,6 @@ std::set<T> setIntersection(std::set<T>& s1, std::set<T>& s2)
         }
     }
     return s3;
-
-
-
-
-}
-
-template <typename T>
-std::set<T> setUnion(std::set<T>& s1, std::set<T>& s2)
-{
-    std::set<T> s3;
-    for (typename std::set<T>::iterator it = s1.begin(); it != s1.end(); ++it){
-        if (s2.find(*it) != s2.end()){
-            s3.insert(*it);
-        }
-    }
-    return s3;
-
-
-
-
 }
 
 /***********************************************/

@@ -92,6 +92,15 @@ int main(int argc, char* argv[])
                 hits = ds.search(terms, 1);
                 displayProducts(hits);
             }
+            else if (cmd == "ADD"){
+
+            }
+            else if (cmd == "VIEWCART"){
+                
+            }
+            else if (cmd == "BUYCART"){
+
+            }
             else if ( cmd == "QUIT") {
                 string filename;
                 if(ss >> filename) {

@@ -20,11 +20,12 @@ std::set<std::string> Movie::keywords() const{
     std::set<std::string> genreKeys = parseStringToWords(genre_);
     std::set<std::string> nameKeys = parseStringToWords(name_);
     for (std::set<std::string>::iterator it = genreKeys.begin(); it != genreKeys.end(); ++it){
-        keys.insert(*it);
+        keys.insert(convToLower(*it));
     }
     for (std::set<std::string>::iterator it = nameKeys.begin(); it != nameKeys.end(); ++it){
-        keys.insert(*it);
+        keys.insert(convToLower(*it));
     }
+    
     return keys;
 }
 

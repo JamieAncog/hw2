@@ -20,10 +20,10 @@ std::set<std::string> Clothing::keywords() const{
     std::set<std::string> brandKeys = parseStringToWords(brand_);
     std::set<std::string> nameKeys = parseStringToWords(name_);
     for (std::set<std::string>::iterator it = brandKeys.begin(); it != brandKeys.end(); ++it){
-        keys.insert(*it);
+        keys.insert(convToLower(*it));
     }
     for (std::set<std::string>::iterator it = nameKeys.begin(); it != nameKeys.end(); ++it){
-        keys.insert(*it);
+        keys.insert(convToLower(*it));
     }
     return keys;
 }
