@@ -22,6 +22,8 @@ void MyDataStore::addProduct(Product* p){
  */
 void MyDataStore::addUser(User* u){
     users_.push_back(u);
+    queue<Product*> mq;
+    cart_.insert(std::pair<User*, queue<Product*>>(u, mq));
 }
 
 /**
@@ -86,13 +88,35 @@ void MyDataStore::dump(std::ostream& ofile){
 
     cout << "</products>" << endl;
 
+    cout << "<users>" << endl;
+
     for (int i = 0; i < (int) users_.size(); i++){
         users_[i]->dump(cout);
     }
 
-    cout << "<users>" << endl;
-
-
-
     cout << "</users>" << endl;
+}
+
+User* MyDataStore::isUserValid(std::string n) const{
+    User* myUser = NULL;
+    for (int i = 0; i < (int) users_.size(); i++){
+        if (users_[i]->getName() == n){
+            myUser = users_[i];
+        }
+    }
+    return myUser;
+}
+
+void MyDataStore::addCart(User* un, Product* prod){
+    cart_[un].push(prod);
+}
+
+vector<Product*> MyDataStore::viewCart(User* un){
+    vector<Product*> prods;
+    queue<Product*> myCart = cart_[un];
+    while (!(myCart.empty())){
+        prods.push_back(myCart.front());
+        myCart.pop();
+    }
+    return prods;
 }

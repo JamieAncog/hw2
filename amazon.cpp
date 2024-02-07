@@ -11,6 +11,7 @@
 #include "datastore.h"
 #include "mydatastore.h"
 #include "util.h"
+#include <queue>
 
 using namespace std;
 struct ProdNameSorter {
@@ -92,11 +93,27 @@ int main(int argc, char* argv[])
                 hits = ds.search(terms, 1);
                 displayProducts(hits);
             }
+            /* Add support for other commands here */
             else if (cmd == "ADD"){
-
+                int hit_index;
+                string username;
+                ss >> username;
+                ss >> hit_index;
+                User* currUser = ds.isUserValid(username);
+                if (currUser == NULL){
+                    cout << "Invalid request" << endl;
+                }
+                else {
+                    Product* currProd = hits[hit_index-1];
+                    ds.addCart(currUser, currProd);
+                }               
             }
             else if (cmd == "VIEWCART"){
-                
+                string username;
+                ss >> username; 
+                User* currUser = ds.isUserValid(username);
+                vector<Product*> currCart = ds.viewCart(currUser);
+                displayProducts(currCart);
             }
             else if (cmd == "BUYCART"){
 
@@ -110,12 +127,7 @@ int main(int argc, char* argv[])
                 }
                 done = true;
             }
-	    /* Add support for other commands here */
-
-
-
-
-            else {
+	        else {
                 cout << "Unknown command" << endl;
             }
         }

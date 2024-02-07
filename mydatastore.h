@@ -8,6 +8,8 @@
 #include "movie.h"
 #include "datastore.h"
 #include "util.h"
+#include <queue>
+#include <map>
 
 class MyDataStore : public DataStore {
     public:
@@ -24,6 +26,8 @@ class MyDataStore : public DataStore {
          */
         void addUser(User* u);
 
+        User* isUserValid(std::string n) const;
+
         /**
          * Performs a search of products whose keywords match the given "terms"
          *  type 0 = AND search (intersection of results for each term) while
@@ -35,7 +39,13 @@ class MyDataStore : public DataStore {
          * Reproduce the database file from the current Products and User values
          */
         void dump(std::ostream& ofile);
+
+        void addCart(User* un, Product* prod);
+
+        vector<Product*> viewCart(User* un);
+
     private:
         std::vector<User*> users_;
+        std::map<User*, queue<Product*>> cart_;
         std::vector<Product*> products_;
 };
