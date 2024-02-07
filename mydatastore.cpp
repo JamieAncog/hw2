@@ -62,42 +62,42 @@ std::vector<Product*> MyDataStore::search(std::vector<std::string>& terms, int t
  * Reproduce the database file from the current Products and User values
  */
 void MyDataStore::dump(std::ostream& ofile){
-    cout << "<products>" << endl;
+    ofile << "<products>" << endl;
 
     for (int i = 0; i < (int) products_.size(); i++){
-        cout << products_[i]->getName() << endl;
-        cout << products_[i]->getPrice() << endl;
-        cout << products_[i]->getQty() << endl;
+        ofile << products_[i]->getName() << endl;
+        ofile << products_[i]->getPrice() << endl;
+        ofile << products_[i]->getQty() << endl;
         
         if (products_[i]->getCat() == "book"){
             Book* myBook = (Book*) products_[i];
-            cout << myBook->getIsbn() << endl;
-            cout << myBook->getAuthor() << endl;
+            ofile << myBook->getIsbn() << endl;
+            ofile << myBook->getAuthor() << endl;
         }
         else if (products_[i]->getCat() == "clothing"){
             Clothing* myClothing = (Clothing*) products_[i];
-            cout << myClothing->getSize() << endl;
-            cout << myClothing->getBrand() << endl;
+            ofile << myClothing->getSize() << endl;
+            ofile << myClothing->getBrand() << endl;
         }
         else if (products_[i]->getCat() == "movie"){
             Movie* myMovie = (Movie*) products_[i];
-            cout << myMovie->getGenre() << endl;
-            cout << myMovie->getRating() << endl;
+            ofile << myMovie->getGenre() << endl;
+            ofile << myMovie->getRating() << endl;
         }
     }
 
-    cout << "</products>" << endl;
+    ofile << "</products>" << endl;
 
-    cout << "<users>" << endl;
+    ofile << "<users>" << endl;
 
     for (int i = 0; i < (int) users_.size(); i++){
-        users_[i]->dump(cout);
+        users_[i]->dump(ofile);
     }
 
-    cout << "</users>" << endl;
+    ofile << "</users>" << endl;
 }
 
-User* MyDataStore::isUserValid(std::string n) const{
+User* MyDataStore::getCurrUser(std::string n) const{
     User* myUser = NULL;
     for (int i = 0; i < (int) users_.size(); i++){
         if (users_[i]->getName() == n){
@@ -111,12 +111,29 @@ void MyDataStore::addCart(User* un, Product* prod){
     cart_[un].push(prod);
 }
 
-vector<Product*> MyDataStore::viewCart(User* un){
-    vector<Product*> prods;
+void MyDataStore::viewCart(User* un){
     queue<Product*> myCart = cart_[un];
+    int count = 1;
     while (!(myCart.empty())){
-        prods.push_back(myCart.front());
+        cout << "Item " << count << endl;
+        count++;
+        cout << myCart.front()->displayString() << endl;
+        cout << endl;
         myCart.pop();
     }
-    return prods;
+}
+
+void MyDataStore::buyCart(User* un){
+    queue<Product*> stillInCart;
+    while (!(cart_[un].empty())){
+        if (cart_[un].front()->getQty() > 0 && un->getBalance() > cart_[un].front()->getPrice()){
+            cart_[un].front()->subtractQty(1);
+            un->deductAmount(cart_[un].front()->getPrice());
+        }
+        else {
+            stillInCart.push(cart_[un].front());
+        }
+        cart_[un].pop();
+    }
+    cart_[un] = stillInCart;
 }

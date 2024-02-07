@@ -99,7 +99,7 @@ int main(int argc, char* argv[])
                 string username;
                 ss >> username;
                 ss >> hit_index;
-                User* currUser = ds.isUserValid(username);
+                User* currUser = ds.getCurrUser(username);
                 if (currUser == NULL){
                     cout << "Invalid request" << endl;
                 }
@@ -111,12 +111,20 @@ int main(int argc, char* argv[])
             else if (cmd == "VIEWCART"){
                 string username;
                 ss >> username; 
-                User* currUser = ds.isUserValid(username);
-                vector<Product*> currCart = ds.viewCart(currUser);
-                displayProducts(currCart);
+                User* currUser = ds.getCurrUser(username);
+                if (currUser == NULL){
+                    cout << "Invalid request" << endl;
+                }
+                ds.viewCart(currUser);
             }
             else if (cmd == "BUYCART"){
-
+                string username;
+                ss >> username; 
+                User* currUser = ds.getCurrUser(username);
+                if (currUser == NULL){
+                    cout << "Invalid request" << endl;
+                }
+                ds.buyCart(currUser);                
             }
             else if ( cmd == "QUIT") {
                 string filename;

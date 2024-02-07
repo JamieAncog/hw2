@@ -26,7 +26,7 @@ class MyDataStore : public DataStore {
          */
         void addUser(User* u);
 
-        User* isUserValid(std::string n) const;
+        User* getCurrUser(std::string n) const;
 
         /**
          * Performs a search of products whose keywords match the given "terms"
@@ -42,7 +42,9 @@ class MyDataStore : public DataStore {
 
         void addCart(User* un, Product* prod);
 
-        vector<Product*> viewCart(User* un);
+        void viewCart(User* un);
+
+        void buyCart(User* un);
 
     private:
         std::vector<User*> users_;
