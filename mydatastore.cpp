@@ -7,7 +7,12 @@ MyDataStore::MyDataStore(){
 }
 
 MyDataStore::~MyDataStore(){
-
+    for (int i = (int) users_.size()-1; i >= 0; i--){
+        delete users_[i];
+    }
+    for (int i = (int) products_.size()-1; i >= 0; i--){
+        delete products_[i];
+    }
 }
 
 /**
