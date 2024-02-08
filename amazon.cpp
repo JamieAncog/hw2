@@ -103,6 +103,9 @@ int main(int argc, char* argv[])
                 if (currUser == NULL){
                     cout << "Invalid request" << endl;
                 }
+                else if (hit_index > (int) hits.size() || hit_index <= 0){
+                    cout << "Invalid request" << endl;
+                }
                 else {
                     Product* currProd = hits[hit_index-1];
                     ds.addCart(currUser, currProd);
