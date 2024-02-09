@@ -116,7 +116,7 @@ int main(int argc, char* argv[])
                 ss >> username; 
                 User* currUser = ds.getCurrUser(username);
                 if (currUser == NULL){
-                    cout << "Invalid request" << endl;
+                    cout << "Invalid username" << endl;
                 }
                 ds.viewCart(currUser);
             }
@@ -125,7 +125,7 @@ int main(int argc, char* argv[])
                 ss >> username; 
                 User* currUser = ds.getCurrUser(username);
                 if (currUser == NULL){
-                    cout << "Invalid request" << endl;
+                    cout << "Invalid username" << endl;
                 }
                 ds.buyCart(currUser);                
             }
