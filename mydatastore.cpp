@@ -20,20 +20,6 @@ MyDataStore::~MyDataStore(){
  */
 void MyDataStore::addProduct(Product* p){
     products_.push_back(p);
-    std::set<std::string> keywords = p->keywords();
-    std::set<std::string>::iterator it;
-    for (it = keywords.begin(); it != keywords.end(); ++it){
-        std::string key = *it;
-        std::map<std::string, std::set<Product*>>::iterator itr = keyMap_.find(key);
-        if (itr != keyMap_.end()){
-            keyMap_[key].insert(p);
-        }
-        else {
-            std::set<Product*> mySet;
-            mySet.insert(p);
-            keyMap_.insert(std::pair<std::string, std::set<Product*>>(key, mySet));
-        }
-    }
 }
 
 /**
