@@ -20,6 +20,20 @@ MyDataStore::~MyDataStore(){
  */
 void MyDataStore::addProduct(Product* p){
     products_.push_back(p);
+    std::set<std::string> keywords = p->keywords();
+    std::set<std::string>::iterator it;
+    for (it = keywords.begin(); it != keywords.end(); ++it){
+        std::string key = *it;
+        std::map<std::string, std::set<Product*>>::iterator itr = keyMap_.find(key);
+        if (itr != keyMap_.end()){
+            keyMap_[key].insert(p);
+        }
+        else {
+            std::set<Product*> mySet;
+            mySet.insert(p);
+            keyMap_.insert(std::pair<std::string, std::set<Product*>>(key, mySet));
+        }
+    }
 }
 
 /**
@@ -38,26 +52,29 @@ void MyDataStore::addUser(User* u){
  */
 std::vector<Product*> MyDataStore::search(std::vector<std::string>& terms, int type){
     std::vector<Product*> myProds;
-    std::set<string> mySet;
-    for (int i = 0; i < (int) terms.size(); i++){
-        mySet.insert(terms[i]);
+    if (terms.size() < 1){
+        return myProds;
     }
-    if (type == 0){
-        for (int i = 0; i < (int) products_.size(); i++){
-            std::set<string> keys = products_[i]->keywords();
-            std::set<string> myInterS = setIntersection<string>(keys, mySet);  
-            if (myInterS.size() >= terms.size()){
-                myProds.push_back(products_[i]);
-            }
+    else if (type == 0){
+        std::set<Product*> mySet = keyMap_[terms[0]];
+        for (int i = 1; i < (int) terms.size(); i++){
+            std::set<Product*> tempSet = keyMap_[terms[i]];
+            mySet = setIntersection<Product*>(mySet, tempSet);
+        }
+        std::set<Product*>::iterator it;
+        for (it = mySet.begin(); it != mySet.end(); ++it){
+            myProds.push_back(*it);
         }
     }
     else {
-        for (int i = 0; i < (int) products_.size(); i++){
-            std::set<string> keys = products_[i]->keywords();
-            std::set<string> myUnion = setUnion<string>(keys, mySet);
-            if (myUnion.size() < keys.size() + mySet.size()){
-                myProds.push_back(products_[i]);
-            }
+        std::set<Product*> mySet = keyMap_[terms[0]];
+        for (int i = 1; i < (int) terms.size(); i++){
+            std::set<Product*> tempSet = keyMap_[terms[i]];
+            mySet = setUnion<Product*>(mySet, tempSet);
+        }
+        std::set<Product*>::iterator it;
+        for (it = mySet.begin(); it != mySet.end(); ++it){
+            myProds.push_back(*it);
         }
     }
     return myProds;

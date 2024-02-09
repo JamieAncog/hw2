@@ -50,4 +50,5 @@ class MyDataStore : public DataStore {
         std::vector<User*> users_;
         std::map<User*, queue<Product*>> cart_;
         std::vector<Product*> products_;
+        std::map<std::string, std::set<Product*>> keyMap_;
 };
