@@ -70,6 +70,7 @@ void MyDataStore::dump(std::ostream& ofile){
     ofile << "<products>" << endl;
 
     for (int i = 0; i < (int) products_.size(); i++){
+        ofile << products_[i]->getCat() << endl;
         ofile << products_[i]->getName() << endl;
         ofile << products_[i]->getPrice() << endl;
         ofile << products_[i]->getQty() << endl;
